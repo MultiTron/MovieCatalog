@@ -26,6 +26,20 @@ namespace MCWebAPI.Controllers
         /// <summary>
         /// Get Movies
         /// </summary>
+        /// <param name="isActive"></param>
+        /// <returns>List of active movies by paging.</returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(GetMoviesResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get([FromQuery] bool isActive)
+        {
+            return Ok(await _movieService.GetMovies(new IsActiveRequest(isActive)));
+        }
+
+        /// <summary>
+        /// Get Movies
+        /// </summary>
         /// <param name="currentPage"></param>
         /// <param name="elementsPerPage"></param>
         /// <returns>List of active movies by paging.</returns>
@@ -35,7 +49,7 @@ namespace MCWebAPI.Controllers
         [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] int currentPage, int elementsPerPage)
         {
-            return Ok(await _movieService.GetMovies(new(currentPage, elementsPerPage)));
+            return Ok(await _movieService.GetMovies(new PagingRequest(currentPage, elementsPerPage)));
         }
         /// <summary>
         /// Gets the movies by Title

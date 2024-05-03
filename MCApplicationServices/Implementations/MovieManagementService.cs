@@ -90,7 +90,7 @@ namespace MCApplicationServices.Implementations
             return new();
         }
 
-        public async Task<GetMoviesResponse> GetMovies(IsActiveRequest request)
+        public async Task<GetMoviesResponse> GetActiveMovies(IsActiveRequest request)
         {
             GetMoviesResponse response = new() { Movies = new() };
             var movies = await _context.Movies.Include("Genre").Include("Rating").Where(x => x.IsActive == request.IsActive).ToListAsync();

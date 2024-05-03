@@ -24,24 +24,24 @@ namespace MCWebAPI.Controllers
             _movieService = movieService;
         }
         /// <summary>
-        /// Get Movies
+        /// Get Movies if they are active
         /// </summary>
-        /// <param name="isActive"></param>
-        /// <returns>List of active movies by paging.</returns>
-        [HttpGet]
+        /// <param name="isActive">Determins wheter to show active or inactive movies</param>
+        /// <returns>List of active movies.</returns>
+        [HttpGet("ActiveMovies")]
         [ProducesResponseType(typeof(GetMoviesResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] bool isActive)
         {
-            return Ok(await _movieService.GetMovies(new IsActiveRequest(isActive)));
+            return Ok(await _movieService.GetActiveMovies(new IsActiveRequest(isActive)));
         }
 
         /// <summary>
-        /// Get Movies
+        /// Get Movies in pages
         /// </summary>
-        /// <param name="currentPage"></param>
-        /// <param name="elementsPerPage"></param>
+        /// <param name="currentPage">The current page</param>
+        /// <param name="elementsPerPage">Number of elements per page</param>
         /// <returns>List of active movies by paging.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(GetMoviesResponse), StatusCodes.Status200OK)]
@@ -80,7 +80,7 @@ namespace MCWebAPI.Controllers
         /// <summary>
         /// Gets the movies by Genre
         /// </summary>
-        /// <param name="rating">Search by movie genre</param>
+        /// <param name="rating">Search by movie rating</param>
         /// <returns>List of movies.</returns>
         [HttpGet("SearchByRating/{rating}")]
         [ProducesResponseType(typeof(GetMoviesResponse), StatusCodes.Status200OK)]

@@ -11,7 +11,7 @@ namespace MCApplicationServices.Implementations
     public class GenreManagementService : BaseManagementService, IGenreManagementService
     {
         private readonly MovieCatalogDbContext _context;
-        public GenreManagementService(ILogger logger, MovieCatalogDbContext context) : base(logger)
+        public GenreManagementService(ILogger<GenreManagementService> logger, MovieCatalogDbContext context) : base(logger)
         {
             _context = context;
         }

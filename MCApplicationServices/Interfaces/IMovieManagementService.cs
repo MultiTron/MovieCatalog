@@ -5,7 +5,7 @@ namespace MCApplicationServices.Interfaces
 {
     public interface IMovieManagementService
     {
-        Task<GetMoviesResponse> GetMovies(IsActiveRequest request);
+        Task<GetMoviesResponse> GetActiveMovies(IsActiveRequest request);
         Task<GetMoviesResponse> GetMovies(PagingRequest request);
         Task<GetMoviesResponse> GetMoviesByTitle(string title);
         Task<GetMoviesResponse> GetMoviesByGenre(string genre);

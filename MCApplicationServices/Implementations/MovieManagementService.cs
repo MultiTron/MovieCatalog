@@ -3,13 +3,15 @@ using MCApplicationServices.Messaging.Requsets;
 using MCApplicationServices.Messaging.Responses;
 using MCData.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 
 namespace MCApplicationServices.Implementations
 {
-    public class MovieManagementService : IMovieManagementService
+    public class MovieManagementService : BaseManagementService, IMovieManagementService
     {
         private readonly MovieCatalogDbContext _context;
-        public MovieManagementService(MovieCatalogDbContext context)
+        public MovieManagementService(ILogger<MovieManagementService> logger, MovieCatalogDbContext context) : base(logger)
         {
             _context = context;
         }
@@ -68,6 +70,11 @@ namespace MCApplicationServices.Implementations
 
         public async Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request)
         {
+            if (request == null)
+            {
+                _logger.LogError("Request is Empty.");
+            }
+            _logger.LogInformation("Movie {title} requested to be added.", request.Movie.Title);
             await _context.Movies.AddAsync(new()
             {
                 Title = request.Movie.Title,
@@ -81,6 +88,17 @@ namespace MCApplicationServices.Implementations
             });
             await _context.SaveChangesAsync();
             return new();
+        }
+
+        public async Task<GetMoviesResponse> GetMovies(IsActiveRequest request)
+        {
+            GetMoviesResponse response = new() { Movies = new() };
+            var movies = await _context.Movies.Include("Genre").Include("Rating").Where(x => x.IsActive == request.IsActive).ToListAsync();
+            foreach (var movie in movies)
+            {
+                response.Movies.Add(new() { Title = movie.Title, ReleaseDate = movie.ReleaseDate, Country = movie.Country, Studio = movie.Studio, Genre = movie.Genre.Name, Rating = movie.Rating.Score });
+            }
+            return response;
         }
     }
 }

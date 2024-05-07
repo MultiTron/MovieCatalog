@@ -99,9 +99,23 @@ namespace MCWebAPI.Controllers
         [ProducesResponseType(typeof(CreateMovieResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] MovieModel movie)
+        public IActionResult Create([FromBody] MovieModel movie)
         {
-            return Ok(await _movieService.CreateMovie(new(movie)));
+            return Ok(_movieService.CreateMovie(new(movie)));
+        }
+
+        /// <summary>
+        /// Delete new movie.
+        /// </summary>
+        /// <param name="id">Id of movie</param>
+        /// <returns>Returns create empty response</returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(CreateMovieResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            return Ok(_movieService.DeleteMovie(new(id)));
         }
     }
 }

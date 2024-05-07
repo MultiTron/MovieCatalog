@@ -33,7 +33,16 @@ namespace MCRepositories.Implementations
 
         public void Delete(T entity)
         {
-            DbSet.Remove(entity);
+            var entry = Context.Entry(entity);
+            if (entry.State != EntityState.Deleted)
+            {
+                entry.State = EntityState.Deleted;
+            }
+            else
+            {
+                DbSet.Attach(entity);
+                DbSet.Remove(entity);
+            }
         }
 
         public void Delete(int id)
@@ -45,15 +54,15 @@ namespace MCRepositories.Implementations
             }
         }
 
-        public IEnumerable<T> GetAll(bool isActive)
+        public async virtual Task<IEnumerable<T>> GetAll(bool isActive)
         {
             var query = DbSet.AsQueryable();
             return SoftDeleteQueryFilter(query, isActive);
         }
 
-        public T GetById(int id, bool isActive = true)
+        public async Task<T> GetById(int id, bool isActive = true)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
         public void Insert(T entity)
@@ -67,7 +76,7 @@ namespace MCRepositories.Implementations
             }
             else
             {
-                DbSet.AddAsync(entity);
+                DbSet.Add(entity);
             }
         }
 
@@ -99,7 +108,7 @@ namespace MCRepositories.Implementations
                 Update(entity);
             }
         }
-        private static IQueryable<T> SoftDeleteQueryFilter(IQueryable<T> query, bool? isActive)
+        protected static IQueryable<T> SoftDeleteQueryFilter(IQueryable<T> query, bool? isActive)
         {
             if (isActive.HasValue)
             {

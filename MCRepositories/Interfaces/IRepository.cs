@@ -4,8 +4,9 @@ namespace MCRepositories.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        IEnumerable<T> GetAll(bool isActive);
-        T GetById(int id, bool isActive = true);
+        Task<IEnumerable<T>> GetAll(bool isActive);
+        Task<T> GetById(int id, bool isActive = true);
+        void Save(T entity);
         void Insert(T entity);
         void Update(T entity, string excludeProperties = "");
         void ActivateDeactivate(T entity);

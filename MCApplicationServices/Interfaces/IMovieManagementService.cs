@@ -11,5 +11,6 @@ namespace MCApplicationServices.Interfaces
         Task<GetMoviesResponse> GetMoviesByGenre(string genre);
         Task<GetMoviesResponse> GetMoviesByRating(string rating);
         Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request);
+        Task<DeleteMovieResponse> DeleteMovie(DeleteMovieRequest request);
     }
 }

@@ -14,6 +14,7 @@ var configuration = new ConfigurationBuilder()
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(configuration)
+    .WriteTo.Console()
     .CreateLogger();
 
 try

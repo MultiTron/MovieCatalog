@@ -17,7 +17,7 @@ namespace MCApplicationServices.Implementations
 
         public async Task<CreateGenreResponse> CreateGenre(CreateGenreRequest request)
         {
-            _unit.Genre.Save(new Genre()
+            _unit.Genre.Insert(new Genre()
             {
                 Name = request.Genre.Name,
                 CreatedBy = "Me",

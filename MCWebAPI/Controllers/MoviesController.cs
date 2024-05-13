@@ -103,5 +103,19 @@ namespace MCWebAPI.Controllers
         {
             return Ok(await _movieService.CreateMovie(new(movie)));
         }
+
+        /// <summary>
+        /// Delete new movie.
+        /// </summary>
+        /// <param name="id">Id of movie</param>
+        /// <returns>Returns create empty response</returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(CreateMovieResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ServiceResponseError), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            return Ok(await _movieService.DeleteMovie(new(id)));
+        }
     }
 }

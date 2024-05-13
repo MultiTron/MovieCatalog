@@ -1,6 +1,8 @@
 using MCApplicationServices.Implementations;
 using MCApplicationServices.Interfaces;
 using MCData.Context;
+using MCRepositories.Implementations;
+using MCRepositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Reflection;
@@ -14,6 +16,7 @@ var configuration = new ConfigurationBuilder()
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(configuration)
+    .WriteTo.Console()
     .CreateLogger();
 
 try
@@ -25,6 +28,10 @@ try
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
     builder.Services.AddDbContext<MovieCatalogDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MCWebAPI")));
 
+    builder.Services.AddScoped<DbContext, MovieCatalogDbContext>();
+    builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
+    builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
     builder.Services.AddScoped<IMovieManagementService, MovieManagementService>();
     builder.Services.AddScoped<IGenreManagementService, GenreManagementService>();
 

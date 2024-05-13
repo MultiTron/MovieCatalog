@@ -1,46 +1,52 @@
 ﻿using MCApplicationServices.Interfaces;
 using MCApplicationServices.Messaging.Requsets;
 using MCApplicationServices.Messaging.Responses;
-using MCData.Context;
 using MCData.Entities;
-using Microsoft.EntityFrameworkCore;
+using MCRepositories.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace MCApplicationServices.Implementations
 {
     public class GenreManagementService : BaseManagementService, IGenreManagementService
     {
-        private readonly MovieCatalogDbContext _context;
-        public GenreManagementService(ILogger<GenreManagementService> logger, MovieCatalogDbContext context) : base(logger)
+        private readonly IUnitOfWork _unit;
+        public GenreManagementService(ILogger<GenreManagementService> logger, IUnitOfWork unit) : base(logger)
         {
-            _context = context;
+            _unit = unit;
         }
 
         public async Task<CreateGenreResponse> CreateGenre(CreateGenreRequest request)
         {
-            _context.Genres.Add(new()
+            _unit.Genre.Insert(new Genre()
             {
                 Name = request.Genre.Name,
-                Movies = new List<Movie>(),
                 CreatedBy = "Me",
                 CreatedOn = DateTime.UtcNow,
             });
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _unit.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
             return new();
         }
 
         public async Task<DeleteGenreResponse> DeleteGenre(DeleteGenreRequest request)
         {
-            var toRemoved = await _context.Genres.FirstOrDefaultAsync(x => x.Id == request.Id);
-            _context.Genres.Remove(toRemoved);
-            await _context.SaveChangesAsync();
+            _unit.Genre.Delete(request.Id);
+            await _unit.SaveChangesAsync();
             return new();
         }
 
         public async Task<GetGenreResponse> GetGenres()
         {
             GetGenreResponse response = new() { Genres = new() };
-            var genres = await _context.Genres.ToListAsync();
+            var genres = await _unit.Genre.GetAll(true);
 
             foreach (var genre in genres)
             {

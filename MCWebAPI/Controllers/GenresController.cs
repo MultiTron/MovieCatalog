@@ -44,7 +44,7 @@ namespace MCWebAPI.Controllers
         /// </summary>
         /// <param name="id">Id of genre to be deleted</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return Ok(await _genreService.DeleteGenre(new(id)));

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MCRepositories\MCRepositories.csproj" />
+    <ProjectReference Include="..\MCData\MCData.csproj" />
   </ItemGroup>
 
 </Project>

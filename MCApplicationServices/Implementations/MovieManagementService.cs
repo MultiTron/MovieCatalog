@@ -74,7 +74,7 @@ namespace MCApplicationServices.Implementations
                 _logger.LogError("Request is Empty.");
             }
             _logger.LogInformation("Movie {title} requested to be added.", request.Movie.Title);
-            _unit.Movies.Save(new() //_context.Movies.AddAsync(new()
+            _unit.Movies.Insert(new() //_context.Movies.AddAsync(new()
             {
                 Title = request.Movie.Title,
                 GenreId = request.Movie.GenreId,

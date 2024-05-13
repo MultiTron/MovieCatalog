@@ -35,9 +35,9 @@ namespace MCWebAPI.Controllers
         /// <param name="genre">Genre model</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create([FromBody] GenreModel genre)
+        public async Task<IActionResult> Create([FromBody] GenreModel genre)
         {
-            return Ok(_genreService.CreateGenre(new(genre)));
+            return Ok(await _genreService.CreateGenre(new(genre)));
         }
         /// <summary>
         /// Deletes a movie genre
@@ -45,9 +45,9 @@ namespace MCWebAPI.Controllers
         /// <param name="id">Id of genre to be deleted</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return Ok(_genreService.DeleteGenre(new(id)));
+            return Ok(await _genreService.DeleteGenre(new(id)));
         }
     }
 }

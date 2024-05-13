@@ -18,7 +18,7 @@ namespace MCRepositories.Implementations
 
         public void Dispose()
         {
-            this.Dispose(true);
+            _context.Dispose();
         }
 
         protected void Dispose(bool disposing)

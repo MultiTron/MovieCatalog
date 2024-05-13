@@ -56,8 +56,7 @@ namespace MCRepositories.Implementations
 
         public async virtual Task<IEnumerable<T>> GetAll(bool isActive)
         {
-            var query = DbSet.AsQueryable();
-            return SoftDeleteQueryFilter(query, isActive);
+            return SoftDeleteQueryFilter(DbSet.AsQueryable(), isActive);
         }
 
         public async Task<T> GetById(int id, bool isActive = true)

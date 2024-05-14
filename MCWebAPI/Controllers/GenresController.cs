@@ -1,5 +1,6 @@
 ﻿using MCApplicationServices.Interfaces;
 using MCApplicationServices.Messaging.Requsets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MCWebAPI.Controllers
@@ -7,8 +8,10 @@ namespace MCWebAPI.Controllers
     /// <summary>
     /// Genre conroller
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class GenresController : ControllerBase
     {
         private readonly IGenreManagementService _genreService;

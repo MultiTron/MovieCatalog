@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MCInfrastructure\MCInfrastructure.csproj" />
     <ProjectReference Include="..\MCRepositories\MCRepositories.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
 using MCData.Entities;
+using MCInfrastructure.Messaging.Requsets.Genres;
+using MCInfrastructure.Messaging.Responses.Genres;
 using MCRepositories.Interfaces;
 using Microsoft.Extensions.Logging;
 

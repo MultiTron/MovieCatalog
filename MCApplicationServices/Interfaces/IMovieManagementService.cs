@@ -1,5 +1,6 @@
-﻿using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
+﻿using MCInfrastructure.Messaging.Requsets;
+using MCInfrastructure.Messaging.Requsets.Movies;
+using MCInfrastructure.Messaging.Responses.Movies;
 
 namespace MCApplicationServices.Interfaces
 {

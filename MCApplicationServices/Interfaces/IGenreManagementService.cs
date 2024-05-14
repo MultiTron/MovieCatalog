@@ -1,5 +1,5 @@
-﻿using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
+﻿using MCInfrastructure.Messaging.Requsets.Genres;
+using MCInfrastructure.Messaging.Responses.Genres;
 
 namespace MCApplicationServices.Interfaces
 {

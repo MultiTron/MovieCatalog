@@ -1,5 +1,5 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging.Requsets;
+using MCInfrastructure.Messaging.Requsets.Genres;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

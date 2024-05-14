@@ -1,7 +1,8 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
 using MCData.Entities;
+using MCInfrastructure.Messaging.Requsets;
+using MCInfrastructure.Messaging.Requsets.Movies;
+using MCInfrastructure.Messaging.Responses.Movies;
 using MCRepositories.Interfaces;
 using Microsoft.Extensions.Logging;
 

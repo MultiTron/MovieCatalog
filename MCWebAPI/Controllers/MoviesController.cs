@@ -1,7 +1,8 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging;
-using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
+using MCInfrastructure.Messaging;
+using MCInfrastructure.Messaging.Requsets;
+using MCInfrastructure.Messaging.Requsets.Movies;
+using MCInfrastructure.Messaging.Responses.Movies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

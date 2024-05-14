@@ -3,10 +3,12 @@ using MCApplicationServices.Interfaces;
 using MCData.Context;
 using MCRepositories.Implementations;
 using MCRepositories.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Reflection;
-
+using System.Text;
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -25,8 +27,28 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
+    var connectionString = configuration.GetConnectionString("DefaultConnectionString");
     builder.Services.AddDbContext<MovieCatalogDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("MCWebAPI")));
+
+    //Authentication
+    var tokenKey = configuration["Authentication.TokenKey"] ?? "Not working token key";
+    builder.Services.AddAuthentication(x =>
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(x =>
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(tokenKey)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    }
+    );
 
     builder.Services.AddScoped<DbContext, MovieCatalogDbContext>();
     builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
@@ -34,6 +56,7 @@ try
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
     builder.Services.AddScoped<IMovieManagementService, MovieManagementService>();
     builder.Services.AddScoped<IGenreManagementService, GenreManagementService>();
+    builder.Services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager(tokenKey));
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -62,6 +85,7 @@ try
         app.UseSwaggerUI();
     }
 
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();

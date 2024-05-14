@@ -2,6 +2,7 @@
 using MCApplicationServices.Messaging;
 using MCApplicationServices.Messaging.Requsets;
 using MCApplicationServices.Messaging.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MCWebAPI.Controllers
@@ -9,6 +10,7 @@ namespace MCWebAPI.Controllers
     /// <summary>
     /// Movie Catalog
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]

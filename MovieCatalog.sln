@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCData", "MCData\MCData.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCApplicationServices", "MCApplicationServices\MCApplicationServices.csproj", "{EBB4A136-1E2A-43D9-BD22-BC2FF88DE402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCRepositories", "MCRepositories\MCRepositories.csproj", "{B617CD34-F1EB-402C-A994-0C96F15CB1ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCRepositories", "MCRepositories\MCRepositories.csproj", "{B617CD34-F1EB-402C-A994-0C96F15CB1ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MC.Website", "MC.Website\MC.Website.csproj", "{46427BE6-B73C-4B27-87C6-CA65C0FAA7AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCInfrastructure", "MCInfrastructure\MCInfrastructure.csproj", "{2C79602A-CFF7-4EC4-B158-56995924BEE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCWebWCF", "MCWebWCF\MCWebWCF.csproj", "{800D4DFE-FA7E-4A92-A367-C393B86CEA3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{B617CD34-F1EB-402C-A994-0C96F15CB1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B617CD34-F1EB-402C-A994-0C96F15CB1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B617CD34-F1EB-402C-A994-0C96F15CB1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46427BE6-B73C-4B27-87C6-CA65C0FAA7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46427BE6-B73C-4B27-87C6-CA65C0FAA7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46427BE6-B73C-4B27-87C6-CA65C0FAA7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46427BE6-B73C-4B27-87C6-CA65C0FAA7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C79602A-CFF7-4EC4-B158-56995924BEE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C79602A-CFF7-4EC4-B158-56995924BEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C79602A-CFF7-4EC4-B158-56995924BEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C79602A-CFF7-4EC4-B158-56995924BEE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{800D4DFE-FA7E-4A92-A367-C393B86CEA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{800D4DFE-FA7E-4A92-A367-C393B86CEA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{800D4DFE-FA7E-4A92-A367-C393B86CEA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{800D4DFE-FA7E-4A92-A367-C393B86CEA3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

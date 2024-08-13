@@ -1,7 +1,7 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
 using MCData.Entities;
+using MCInfrastructure.Messaging.Requsets.Genres;
+using MCInfrastructure.Messaging.Responses.Genres;
 using MCRepositories.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -17,16 +17,17 @@ namespace MCApplicationServices.Implementations
 
         public async Task<CreateGenreResponse> CreateGenre(CreateGenreRequest request)
         {
-            _unit.Genre.Insert(new Genre()
+            var entity = new Genre()
             {
                 Name = request.Genre.Name,
                 CreatedBy = "Me",
                 CreatedOn = DateTime.UtcNow,
-            });
+            };
+            _unit.Genre.Insert(entity);
+            _unit.Genre.ActivateDeactivate(entity);
             try
             {
                 await _unit.SaveChangesAsync();
-
             }
             catch (Exception ex)
             {

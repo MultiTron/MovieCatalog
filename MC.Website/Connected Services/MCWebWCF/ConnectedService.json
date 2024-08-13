@@ -1,0 +1,19 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:5297/GenresService.svc"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, MCWebWCF"
+    ],
+    "references": [
+      "C:\\Users\\fmi\\source\\repos\\MovieCatalog\\MC.Website\\bin\\Debug\\net7.0\\MCInfrastructure.dll"
+    ],
+    "targetFramework": "net7.0",
+    "typeReuseMode": "All"
+  }
+}

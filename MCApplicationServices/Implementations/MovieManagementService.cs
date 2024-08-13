@@ -1,6 +1,8 @@
 ﻿using MCApplicationServices.Interfaces;
-using MCApplicationServices.Messaging.Requsets;
-using MCApplicationServices.Messaging.Responses;
+using MCData.Entities;
+using MCInfrastructure.Messaging.Requsets;
+using MCInfrastructure.Messaging.Requsets.Movies;
+using MCInfrastructure.Messaging.Responses.Movies;
 using MCRepositories.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -73,8 +75,12 @@ namespace MCApplicationServices.Implementations
             {
                 _logger.LogError("Request is Empty.");
             }
-            _logger.LogInformation("Movie {title} requested to be added.", request.Movie.Title);
-            _unit.Movies.Insert(new() //_context.Movies.AddAsync(new()
+            else
+            {
+                _logger.LogInformation("Movie {title} requested to be added.", request.Movie.Title);
+            }
+
+            var entity = new Movie() //_context.Movies.AddAsync(new()
             {
                 Title = request.Movie.Title,
                 GenreId = request.Movie.GenreId,
@@ -84,7 +90,10 @@ namespace MCApplicationServices.Implementations
                 CreatedBy = "Me",
                 CreatedOn = DateTime.UtcNow,
                 IsActive = true,
-            });
+            };
+
+            _unit.Movies.Insert(entity);
+            _unit.Movies.ActivateDeactivate(entity);
             await _unit.SaveChangesAsync();
             return new();
         }
